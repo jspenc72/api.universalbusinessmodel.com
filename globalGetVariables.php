@@ -90,7 +90,11 @@ $activeStrategicPositioningId = $_GET['activeStrategicPositioningId'];
 $activeSwotAnalysisVariableId = $_GET['activeSwotAnalysisVariableId'];
 	//UBM MCS Model Add Task
 $activeTaskId = $_GET['activeTaskId'];						
-
 //Heirarchy Object Variables
 	//UBM MCS Model Add Policy
 	//UBM MCS Model Add Position
+	//UBM MCS Model Create Position
+$activeModelId = $_GET['activeModelId'];
+$positionDescription = $_GET['positionDescription'];
+$positionTitle = $_GET['positionTitle'];
+$positionReportsTo = $_GET['positionReportsTo'];

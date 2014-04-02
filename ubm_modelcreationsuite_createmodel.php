@@ -1,5 +1,6 @@
 <?php
 require_once('globalGetVariables.php');
+require_once('ubms_db_config.php');
 
 //$property_name = $_GET['property_name'];
 //   if($aname=='FindMyDriver')
