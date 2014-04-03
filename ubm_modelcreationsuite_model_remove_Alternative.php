@@ -5,7 +5,6 @@ $username = $_GET['username'];
 //Put your json request variables here
 $activeModelId = $_GET['activeModelId'];
 $activeAlternativeId = $_GET['activeAlternativeId'];
-
 //End JSON Request Variables
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];

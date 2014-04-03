@@ -98,3 +98,92 @@ $activeModelId = $_GET['activeModelId'];
 $positionDescription = $_GET['positionDescription'];
 $positionTitle = $_GET['positionTitle'];
 $positionReportsTo = $_GET['positionReportsTo'];
+	//UBM MCS Model Create JobDescription
+$activeModelId = $_GET['activeModelId'];
+$objective = $_GET['objective'];
+$title = $_GET['title'];
+$dutiesAndResponsibilities = $_GET['dutiesAndResponsibilities'];
+$positionId = $_GET['positionId'];
+$qualifications = $_GET['qualifications'];
+$ageRequirement = $_GET['ageRequirement'];
+$educationRequirement = $_GET['educationRequirement'];
+$physicalDemand = $_GET['physicalDemand'];
+$workEnvironment = $_GET['workEnviroment'];
+	//UBM MCS Model Create Policy
+$activeModelId = $_GET['activeModelId'];
+$description = $_GET['description'];
+$title = $_GET['title'];
+$purpose = $_GET['purpose'];
+$scope = $_GET['scope'];
+$type = $_GET['type'];
+$jobDescriptionId = $_GET['jobDescriptionId'];
+	//UBM MCS Model Create Procedure
+$activeModelId = $_GET['activeModelId'];
+$description = $_GET['description'];
+$title = $_GET['title'];
+$purpose = $_GET['purpose'];
+$scope = $_GET['scope'];
+$effectiveDate = $_GET['effectiveDate'];
+$policyId = $_GET['policyId'];
+	//UBM MCS Model Create Step
+$activeModelId = $_GET['activeModelId'];
+$title = $_GET['title'];
+$description = $_GET['description'];
+$stepNumber = $_GET['stepNumber'];
+$instruction = $_GET['instruction'];
+$procedureId = $_GET['procedureId'];
+	//UBM MCS Model Create Task
+$activeModelId = $_GET['activeModelId'];
+$title = $_GET['title'];
+$taskNumber = $_GET['taskNumber'];
+$reference = $_GET['reference'];
+$instruction = $_GET['instruction'];
+$stepId = $_GET['stepId'];
+	//UBM MCS Model Remove Position
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
+	//UBM MCS Model Remove JobDescription
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
+	//UBM MCS Model Remove Policy
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
+	//UBM MCS Model Remove Procedure
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
+	//UBM MCS Model Remove Step
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
+	//UBM MCS Model Remove Task
+$activeModelId = $_GET['activeModelId'];
+$activePositionId = $_GET['activePositionId'];
+$activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activePolicyId = $_GET['activePolicyId'];
+$activeProcedureId = $_GET['activeProcedureId'];
+$activeStepId = $_GET['activeStepId'];
+$activeTaskId = $_GET['activeTaskId'];
