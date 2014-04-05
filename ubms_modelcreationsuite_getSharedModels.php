@@ -1,14 +1,8 @@
 <?php
- $aname = $_GET['appname'];
- $RQType = $_GET['RQType'];
- $username = $_GET['username'];
- $usrpasswd = $_GET['password'];
- require_once('ubms_db_config.php');	
-
-$DBServer = 'localhost'; // e.g 'localhost' or '192.168.1.100'
-$DBUser   = 'jessespe';
-$DBPass   = 'Xfn73Xm0';
-$DBName   = 'jessespe_UBMv1';			
+require_once('globalGetVariables.php');
+require_once('ubms_db_config.php');
+require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn
+			
 	$conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 	 
 	// check connection
@@ -27,7 +21,11 @@ $DBName   = 'jessespe_UBMv1';
 			$all_items = array();
 			while ($items = $rs->fetch_assoc()) {
 					$returnedModelId = stripslashes($items['model_id']);			
-					$sqlsel2="SELECT * FROM ubm_model WHERE id='$returnedModelId'";		//Select all information for each model that was in the first result set...
+					$sqlsel2="
+					SELECT * FROM ubm_model 
+						JOIN ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID
+							ON ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.model_id=ubm_model.id
+					WHERE ubm_model.id='$returnedModelId'";		//Select all information for each model that was in the first result set...
 					$rs2=$conn->query($sqlsel2);
 					 
 					if($rs2 === false) {												//If something is wrong...

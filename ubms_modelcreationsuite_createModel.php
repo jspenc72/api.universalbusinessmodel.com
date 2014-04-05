@@ -12,7 +12,8 @@ if ($conn -> connect_error) {
 $v2 = "'" . $conn -> real_escape_string($reference) . "'";
 $v3 = "'" . $conn -> real_escape_string($title) . "'";
 $v4 = "'" . $conn -> real_escape_string($descritpion) . "'";
-$v5 = "'" . $conn -> real_escape_string($creator_id) . "'";
+$v5 = "'" . $conn -> real_escape_string($username) . "'";
+
 	//1. Insert Model Title into the Models table.
 $sqlins = "INSERT INTO ubm_model (reference, title, description, creator_id) 								
 			VALUES ($v2, $v3, $v4, $v5)";										
@@ -20,13 +21,14 @@ if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);
 } else {
 	$last_inserted_id = $conn -> insert_id;
-	$affected_rows += $conn -> affected_rows;
+	$affected_rows = $affected_rows + $conn -> affected_rows;
 	//2. Make an entry in the antiSlipsism table to generate a Universal Unique Identifier for the Model to allow objects to be attached to it.
 	$sqlins2 = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID (legal_entity_id, model_id, position_id, jobDescription_id, policy_id, procedure_id, step_id	, task_id, created_by) 
 				VALUES ( '0',$last_inserted_id,'0','0','0','0','0', '0', $v5 )";
 	if ($conn -> query($sqlins2) === false) {
 		trigger_error('Wrong SQL: ' . $sqlins2 . ' Error: ' . $conn -> error, E_USER_ERROR);
 	} else {
+			$affected_rows = $affected_rows + $conn -> affected_rows;
 			$last_inserted_model_uuid = $conn -> insert_id;		
 	//3. Make an entry in the antiSlipsism table to generate a Universal Unique Identifier for a position called Owners to automatically attach it to the model.
 		$sqlins3 = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID (legal_entity_id, model_id, position_id, jobDescription_id, policy_id, procedure_id, step_id	, task_id, created_by) 
@@ -43,15 +45,34 @@ if ($conn -> query($sqlins) === false) {
 			if ($conn -> query($sqlins3) === false) {
 				trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 			} else {
-	//5. Insert a row in the hierarchy object closureTable so an owners position is tied to the last inserted model in the hierarchy object table.
-	//6. Insert a row in the hierarchy object closureTable so an owners position is tied to itself in the hierarchy object table.
-					$sqlins3 = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable ( ancestor_id, descendant_id, path_length, created_by ) 
-							VALUES ( $last_inserted_model_uuid, $last_inserted_position_uuid, '3', $v5 ), ( $last_inserted_position_uuid, $last_inserted_position_uuid, '3', $v5 )";
+				$affected_rows = $affected_rows + $conn -> affected_rows;
+	//5. Insert a row in the hierarchy object closureTable so an owners position is tied to itself in the hierarchy object table.
+				$sqlins3 = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable ( ancestor_id, descendant_id, path_length, created_by ) 
+					VALUES ( $last_inserted_position_uuid, $last_inserted_position_uuid, '0', $v5 )";
 				if ($conn -> query($sqlins3) === false) {
 					trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 				} else {
 					$affected_rows = $affected_rows + $conn -> affected_rows;
-					echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows, the UUID of the new model is $last_inserted_id'}" . ')';
+	//6. Insert a row in the hierarchy object closureTable so the owners position is tied to the last inserted model in the hierarchy object table.
+					$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
+								 SELECT a.ancestor_id, d.descendant_id, a.path_length+d.path_length+1
+								   FROM ubm_modelcreationsuite_heirarchy_object_closureTable a, ubm_modelcreationsuite_heirarchy_object_closureTable d
+								  WHERE a.descendant_id=$last_inserted_model_uuid 
+								  	AND d.ancestor_id=$last_inserted_position_uuid";
+					if ($conn -> query($sqlins3) === false) {
+						trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
+					} else {
+						$affected_rows = $affected_rows + $conn -> affected_rows;						
+	//7. Insert a self link into the position closure table.
+						$sqlins4 = "INSERT INTO ubm_model_position_closure ( ancestor_UUID, descendant_UUID, path_length, created_by ) 
+							VALUES ( $last_inserted_position_uuid, $last_inserted_position_uuid, '0', $v5 )";
+						if ($conn -> query($sqlins4) === false) {
+							trigger_error('Wrong SQL: ' . $sqlins4 . ' Error: ' . $conn -> error, E_USER_ERROR);
+						} else {
+							$affected_rows = $affected_rows + $conn -> affected_rows;						
+							echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows, the UUID of the new model is $last_inserted_position_uuid'}" . ')';
+						}
+					}
 				}
 			}
 		}

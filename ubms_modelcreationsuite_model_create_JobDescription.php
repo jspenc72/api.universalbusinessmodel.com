@@ -20,7 +20,7 @@ $v10 = "'" . $conn -> real_escape_string($educationRequirement) . "'";
 $v11 = "'" . $conn -> real_escape_string($physicalDemand) . "'";
 $v12 = "'" . $conn -> real_escape_string($workEnvironment) . "'";
 //1. Insert the jobDescription into the jobDescriptions table.
-$sqlins = "INSERT INTO ubm_model_jobDescriptions (objective, title, created_by, essential_duties_and_responsibilities, qualifications, age_requirement, education_requirements, physical_demand, work_environment ) VALUES ( $v3, $v4, $v5, $v6, $v8, $v9, $v10, $v11, $v12)"; //Creates a New Core Value record.
+$sqlins = "INSERT INTO ubm_model_jobDescriptions (objective, title, created_by, essential_duties_and_responsibilities, qualifications, age_requirement, education_requirements, physical_demand, work_environment ) VALUES ( $v3, $v4, $v5, $v6, $v8, $v9, $v10, $v11, $v12)"; //Creates a New Job Description record.
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);
 } else {
@@ -34,8 +34,8 @@ if ($conn -> query($sqlins) === false) {
 	} else {		
 //3. Now INSERT the JD_UUID into the Closure table so it reports to itself.
 		$last_inserted_JD_UUID = $conn -> insert_id;
-		$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
-					 VALUES ( $last_inserted_JD_UUID,$last_inserted_JD_UUID,'0' )";
+		$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length, created_by)
+					 VALUES ( $last_inserted_JD_UUID, $last_inserted_JD_UUID,'0', $username)";
 		if ($conn -> query($sqlins3) === false) {
 			trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 			echo "there was a problem";

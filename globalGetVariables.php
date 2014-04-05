@@ -1,4 +1,6 @@
 <?php
+// Active Model UUID
+$activeModelUUID = $_GET['activeModelUUID'];
 //Application Authentication Variables
  $aname = $_GET['appname'];				//Name of the application using the API
  $key = $_GET['key'];					//Application Security Key issued by BMCL
@@ -98,6 +100,7 @@ $activeModelId = $_GET['activeModelId'];
 $positionDescription = $_GET['positionDescription'];
 $positionTitle = $_GET['positionTitle'];
 $positionReportsTo = $_GET['positionReportsTo'];
+$positionParent = $_GET['positionParent'];
 	//UBM MCS Model Create JobDescription
 $activeModelId = $_GET['activeModelId'];
 $objective = $_GET['objective'];
