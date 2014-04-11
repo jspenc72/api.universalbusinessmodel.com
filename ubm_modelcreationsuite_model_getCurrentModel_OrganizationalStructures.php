@@ -24,7 +24,7 @@ $DBName   = 'jessespe_UBMv1';
 //SELECT
 $all_items = array();
 //1. Select all records for checklist items stored in model_creation_suite, Count the number of items in the checklist.
-			$sqlsel1="SELECT * FROM ubm_model_has_organizationalstructures WHERE model_id=$activeModelId";		//Select all 
+			$sqlsel1="SELECT * FROM ubm_model_has_organizationalstructures WHERE model_UUID=$activeModelId";		//Select all 
 			$rs1=$conn->query($sqlsel1);
 			if($rs1 === false) {
 			  trigger_error('Wrong SQL: ' . $sqlsel1 . ' Error: ' . $conn->error, E_USER_ERROR);
