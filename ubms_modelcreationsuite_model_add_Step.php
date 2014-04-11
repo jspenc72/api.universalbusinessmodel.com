@@ -45,7 +45,7 @@ if ($conn -> query($sqlins) === false) {
 	if ($conn -> query($sqlins2) === false) {
 		trigger_error('Wrong SQL: ' . $sqlins2 . ' Error: ' . $conn -> error, E_USER_ERROR);
 	} else {
-//5. Now INSERT the links to all the ancestors of the JD_UUID into the Closure table so has a tie to all ojects above it.
+//5. Now INSERT the links to all the ancestors of the ST_UUID into the Closure table so has a tie to all ojects above it.
 			$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
 						 SELECT a.ancestor_id, d.descendant_id, a.path_length+d.path_length+1
 						   FROM ubm_modelcreationsuite_heirarchy_object_closureTable a, ubm_modelcreationsuite_heirarchy_object_closureTable d

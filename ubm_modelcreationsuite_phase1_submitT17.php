@@ -27,6 +27,16 @@ $DBName   = 'jessespe_UBMv1';
 			$v3="'" . $conn->real_escape_string($conceptualDefinition) . "'";
 			$v4="'" . $conn->real_escape_string($missionStatement) . "'";
 			$v5="'" . $conn->real_escape_string($visionStatement) . "'";
+			$sqlsel="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID WHERE UUID=$activeModelUUID";																							//Select the category from the database
+				$rs=$conn->query($sqlsel);
+				if($rs === false) {
+				  trigger_error('Wrong SQL: ' . $sqlsel . ' Error: ' . $conn->error, E_USER_ERROR);
+				} else {
+						while ($items = $rs->fetch_assoc()) {
+									$returnedModelId = stripslashes($items['model_id']);
+						}			
+				  $rows_returned = $rs->num_rows;
+				}
 			$sql="UPDATE `ubm_model` SET conceptual_definition=$v3, 
 			mission_statement=$v4, 
 			vision_statement=$v5

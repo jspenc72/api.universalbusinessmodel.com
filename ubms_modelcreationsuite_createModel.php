@@ -78,6 +78,30 @@ if ($conn -> query($sqlins) === false) {
 		}
 	}
 }
+
+$conn1 = new mysqli($DBServer, $DBUser, $DBPass, jessespe_FindMyDriver);
+// check connection
+if ($conn -> connect_error) {
+	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
+}
+
+$sqlsel = "SELECT * FROM members WHERE username=$username";
+if ($conn1 -> query($sqlsel) === false) {
+	trigger_error('Wrong SQL: ' . $sqlsel . ' Error: ' . $conn1 -> error, E_USER_ERROR);
+} else {
+	while ($items1 = $rs1->fetch_assoc()) {
+			$returnUserId = stripslashes($items1['id']);
+		}
+	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows, the username found was $username'}" . ')';
+}
+$sqlins5 = "INSERT INTO ubm_model_has_members (member_id, model_UUID, member_role) 
+							VALUES ($returnUserId, $last_inserted_model_uuid, Level1)";
+						if ($conn -> query($sqlins5) === false) {
+							trigger_error('Wrong SQL: ' . $sqlins5 . ' Error: ' . $conn -> error, E_USER_ERROR);
+						} else {
+							$affected_rows = $affected_rows + $conn -> affected_rows;						
+							echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows, the model $last_inserted_model_uuid was shared with $returnUserId'}" . ')';
+						}
 //Send Email Message
 $to = "jspenc72@gmail.com";
 $subject = "A new Business Model was created by $v5!";

@@ -30,12 +30,26 @@ if ($conn -> connect_error) {
 }
 
 //INSERT
-$v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
+$v2 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
 $v3 = "'" . $conn -> real_escape_string($username) . "'";
 $v4 = "'" . $conn -> real_escape_string($taskId) . "'";
 $v5 = "'" . $conn -> real_escape_string($startTime) . "'";
 
-$sqlins = "INSERT INTO model_creation_suite_has_prepared_by_records (model_id, preparer_username, task_id, start_time) VALUES ($v2, $v3, $v4, $v5)";
+$sqlsel="SELECT * FROM ubm_model 
+			JOIN ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID
+				ON ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.model_id=ubm_model.id
+			WHERE UUID=$activeModelUUID";				
+$rs=$conn->query($sqlsel);
+if($rs === false) {
+  trigger_error('Wrong SQL: ' . $sqlsel . ' Error: ' . $conn->error, E_USER_ERROR);
+} else {
+		while ($items = $rs->fetch_assoc()) {
+					$returnedModelId = stripslashes($items['id']);												//Obtain the id for the appropriate category
+			//echo $returnedCategory_id;
+		}			
+  $rows_returned = $rs->num_rows;
+}
+$sqlins = "INSERT INTO model_creation_suite_has_prepared_by_records (model_id, preparer_username, task_id, start_time) VALUES ($returnedModelId, $v3, $v4, $v5)";
 
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);

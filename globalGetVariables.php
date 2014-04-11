@@ -190,3 +190,52 @@ $activePolicyId = $_GET['activePolicyId'];
 $activeProcedureId = $_GET['activeProcedureId'];
 $activeStepId = $_GET['activeStepId'];
 $activeTaskId = $_GET['activeTaskId'];
+
+//UBM MODELCREATION SUITE CHECKLIST Step 4
+ $activeModelId = $_GET['activeModelId']; 
+ $modelOwnerLegalEntity = $_GET['modelOwnerLegalEntity']; 
+ $modelOwnerCCODE = $_GET['modelOwnerCCODE']; 
+ $modelContactName = $_GET['modelContactName']; 
+ $modelContactPhone = $_GET['modelContactPhone']; 
+ $modelContactEmail = $_GET['modelContactEmail']; 
+ $modelPurpose = $_GET['modelPurpose']; 
+ $modelScope = $_GET['modelScope']; 
+ $catBusiness = $_GET['catBusiness']; 
+ $catEducation = $_GET['catEducation']; 
+ $catFamily = $_GET['catFamily']; 
+ $catHealth = $_GET['catHealth']; 
+ $catMedical = $_GET['catMedical']; 
+ $catProductivity = $_GET['catProductivity']; 
+ $catUtility = $_GET['catUtility']; 
+ $catChurch = $_GET['catChurch']; 
+ $catCoop = $_GET['catCoop']; 
+ $catOther = $_GET['catOther']; 
+ //UBM MODELCREATION SUITE CHECKLIST Step 17
+ $activeModelId = $_GET['activeModelId']; 
+ $conceptualDefinition = $_GET['conceptualDefinition']; 
+ $missionStatement = $_GET['missionStatement']; 
+ $visionStatement = $_GET['visionStatement']; 
+ 
+ 
+//UBM MODELCREATION SUITE CHECKLIST SUBMIT PREPARED BY
+ $taskId = $_GET['taskId'];
+ $startTime = $_GET['startTime'];
+ 
+ //User Register
+ 
+ //UBM MODELCREATION SUITE ORG CHART
+ $activeModelOwnersUUID = $_GET['activeModelOwnersUUID'];
+ 
+ // Get Users With Access
+  $aname = $_GET['appname'];
+ $RQType = $_GET['RQType'];
+ $username = $_GET['username'];
+ $usrpasswd = $_GET['password'];
+ $activeModelId = $_GET['activeModelId'];
+ //Remove User From Model
+  $aname = $_GET['appname'];
+ $RQType = $_GET['RQType'];
+ $username = $_GET['username'];
+ $usrpasswd = $_GET['password'];
+ $selectedUser = $_GET['selectedUserId'];
+ 

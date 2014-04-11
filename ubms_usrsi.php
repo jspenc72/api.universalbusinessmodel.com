@@ -19,7 +19,7 @@
 					while($row = $result->fetch_assoc()) {
 						$returnuserpassword = stripslashes($row['password']);
 						$accounttype = stripslashes($row['account_type']);
-						if($returnuserpassword==$usrpasswd){
+						if($returnuserpassword==md5($usrpasswd)){
 				         	echo $_GET['callback'] . '(' . "{'message' : 'Login successful for user $returnuser with db password $returnuserpassword and entered password $usrpasswd','validation' : 'TRUE','accounttype' : '$accounttype'}" . ')';
 //				         	echo $_GET['callback'] . '(' . "{'message' : 'Password Validated'}" . ')';
 						}else{

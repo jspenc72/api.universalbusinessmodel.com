@@ -12,9 +12,9 @@ require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 da
 $all_items = array();
 //1. Select all records in the ubm_model_positions table that have an instance created in the ubm_model_has_positions table.
 			$sqlsel1="SELECT * FROM ubm_model 
-					JOIN ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID
-					ON ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.model_id=ubm_model.id
-					WHERE creator_id='$username'";
+						JOIN ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID
+							ON ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.model_id=ubm_model.id
+						WHERE creator_id='$username'";
 			//Select all 
 			$rs1=$conn->query($sqlsel1);
 			if($rs1 === false) {

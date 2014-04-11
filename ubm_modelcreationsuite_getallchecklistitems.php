@@ -14,6 +14,8 @@ $DBName   = 'jessespe_UBMv1';
 
 //SELECT
 $all_items = array();
+
+
 //1. Select all records for checklist items stored in model_creation_suite, Count the number of items in the checklist.
 			$sqlsel1="SELECT * FROM model_creation_suite";		//Select all 
 			$rs1=$conn->query($sqlsel1);

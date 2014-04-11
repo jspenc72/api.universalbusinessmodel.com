@@ -20,12 +20,12 @@ require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 da
 
 			$all_items = array();
 			while ($items = $rs->fetch_assoc()) {
-					$returnedModelId = stripslashes($items['model_id']);			
+					$returnedModelUUID = stripslashes($items['model_UUID']);			
 					$sqlsel2="
 					SELECT * FROM ubm_model 
 						JOIN ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID
 							ON ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.model_id=ubm_model.id
-					WHERE ubm_model.id='$returnedModelId'";		//Select all information for each model that was in the first result set...
+					WHERE ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID.UUID='$returnedModelUUID'";		//Select all information for each model that was in the first result set...
 					$rs2=$conn->query($sqlsel2);
 					 
 					if($rs2 === false) {												//If something is wrong...

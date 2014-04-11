@@ -17,10 +17,10 @@ if ($conn -> connect_error) {
 }
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($inviteUsername) . "'";
-$v3 = "'" . $conn -> real_escape_string($activeModelId) . "'";
+$v3 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
 $v4 = "'" . $conn -> real_escape_string($memberRole) . "'";
 
-$sqlins = "INSERT INTO ubm_model_has_members (member_id, model_id, member_role) VALUES ($v2, $v3, $v4)";
+$sqlins = "INSERT INTO ubm_model_has_members (member_id, model_UUID, member_role) VALUES ($v2, $v3, $v4)";
 
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);
@@ -28,7 +28,7 @@ if ($conn -> query($sqlins) === false) {
 	$last_inserted_id = $conn -> insert_id;
 	$affected_rows = $conn -> affected_rows;
 }
-echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelId. The email for user added to model is $inviteEmail !'}" . ')';
+echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelUUID. The email for user added to model is $inviteEmail !'}" . ')';
 
 /*SELECT
  $sqlsel="SELECT * FROM ubm_mcs_app_resolutions WHERE openitemid=$openitemid";
