@@ -64,6 +64,7 @@ $activeCustomerId = $_GET['activeCustomerId'];
 $activeFeatureId = $_GET['activeFeatureId'];
 	//UBM MCS Model Add JobDescription
 $activeJobDescriptionId = $_GET['activeJobDescriptionId'];
+$activeJobDescriptionUUID = $_GET['activeJobDescriptionUUID'];
 	//UBM MCS Model Add OrganizationalStructure
 $organizationalStructureId = $_GET['organizationalStructureId'];
 	//UBM MCS Model Add PhysicalFacility
@@ -216,7 +217,6 @@ $activeTaskId = $_GET['activeTaskId'];
  $missionStatement = $_GET['missionStatement']; 
  $visionStatement = $_GET['visionStatement']; 
  
- 
 //UBM MODELCREATION SUITE CHECKLIST SUBMIT PREPARED BY
  $taskId = $_GET['taskId'];
  $startTime = $_GET['startTime'];
@@ -227,15 +227,107 @@ $activeTaskId = $_GET['activeTaskId'];
  $activeModelOwnersUUID = $_GET['activeModelOwnersUUID'];
  
  // Get Users With Access
-  $aname = $_GET['appname'];
+ $aname = $_GET['appname'];
  $RQType = $_GET['RQType'];
  $username = $_GET['username'];
  $usrpasswd = $_GET['password'];
  $activeModelId = $_GET['activeModelId'];
  //Remove User From Model
-  $aname = $_GET['appname'];
+ $aname = $_GET['appname'];
  $RQType = $_GET['RQType'];
  $username = $_GET['username'];
  $usrpasswd = $_GET['password'];
  $selectedUser = $_GET['selectedUserId'];
+ //Remove Strategic Alliance
+ $activeModelId = $_GET['activeModelId'];
+ $activeStrategicAllianceId = $_GET['activeStrategicAllianceId'];
  
+ //Remove Core Value
+ $activeModelId = $_GET['activeModelId'];
+ $activeCoreValueId = $_GET['activeCoreValueId'];
+ 
+ //Remove Customer
+ $activeModelId = $_GET['activeModelId'];
+ $activeCustomerId = $_GET['activeCustomerId'];
+ 
+ //Remove Product
+ $activeModelId = $_GET['activeModelId'];
+ $activeProductId = $_GET['activeProductId'];
+ //Remove Service 
+ $activeModelId = $_GET['activeModelId'];
+ $activeServiceId = $_GET['activeServiceId'];
+ 
+ //Create Product
+$productTitle = $_GET['productTitle'];
+$activeModelId = $_GET['activeModelId'];
+
+//Create Product
+$activeModelId = $_GET['activeModelId'];
+$alternativeDescription = $_GET['alternativeDescription'];
+$alternativeDecision = $_GET['alternativeDecision'];
+ 
+ //create core value
+ $title = $_GET['coreValueTitle'];
+$summary = $_GET['coreValueSummary'];
+$activeModelUUID = $_GET['activeModelUUID'];
+
+// Create Customer
+$name = $_GET['customerName'];
+$activeModelId = $_GET['activeModelId'];
+//Create Feature
+$featureDescription = $_GET['featureDescription'];
+$featureTitle = $_GET['featureTitle'];
+$activeModelId = $_GET['activeModelId'];
+//Create Physical Facility
+$physicalFacilityTitle = $_GET['physicalFacilityTitle'];
+$physicalFacilityAssociatedCost = $_GET['physicalFacilityAssociatedCost'];
+$activeModelId = $_GET['activeModelId'];
+ 
+// Create Services
+$service = $_GET['serviceTitle'];
+$activeModelId = $_GET['activeModelId'];
+ 
+ // Create Strategic Alliance
+ $strategicAllianceComment = $_GET['strategicAllianceComment'];
+$strategicAllianceDescription = $_GET['strategicAllianceDescription'];
+$activeModelId = $_GET['activeModelId'];
+// Create Strategic positioning questions
+$strategicPosistion = $_GET['strategicPosistionQuestion'];
+$activeModelId = $_GET['activeModelId'];
+// Add alternative
+$activeAlternativeId = $_GET['activeAlternativeId'];
+
+//Remove Alternative
+$activeModelId = $_GET['activeModelId'];
+$activeAlternativeId = $_GET['activeAlternativeId'];
+
+//Remove Feature
+$activeModelId = $_GET['activeModelId'];
+$activeFeatureId = $_GET['activeFeatureId'];
+//Remove Physical Facility
+$activeModelId = $_GET['activeModelId'];
+$activePhysicalFacilityId = $_GET['activePhysicalFacilityId'];
+
+//Remove StrategicPosistioning
+$activeModelId = $_GET['activeModelId'];
+$activeStrategicPositioningId = $_GET['activeStrategicPositioningId'];
+//remove organizational Structure
+$activeModelUUID = $_GET['activeModelUUID'];
+$activeOrganizationalStructureId = $_GET['activeOrganizationalStructureId'];
+//Remove Physical Facility
+$activePhysicalFacilitiesId = $_GET['activePhysicalFacilityId'];
+
+//Create Organizational Structure
+$OrganizationalStructureTitle = $_GET['organizationalStructureTitle'];
+$organizationalStructureTitleReportsTo = $_GET['organizationalStructureTitleReportsTo'];
+$activeModelId = $_GET['activeModelId'];
+
+//Get risks
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+//Get Investments
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+// Count Phases
+$activePhaseId = $_GET['activePhaseId'];
+//Get Child Elements
+$activeModelId = $_GET['activeModelId'];
+$activeObjectUUID = $_GET['activeObjectUUID'];

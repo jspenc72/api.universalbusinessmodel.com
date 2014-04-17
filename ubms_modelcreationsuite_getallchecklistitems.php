@@ -43,7 +43,7 @@ for ($x=1; $x<=$num_rows; $x++)
   {
   			$row_items = array();
 //3. Select the final reviewer entrys for the checklist with task_id equal to x
-			$sqlsel2="SELECT * FROM model_creation_suite_has_final_reviewed_by_records WHERE model_id='$activeModelId' AND task_id='$x'";		//Select all 
+			$sqlsel2="SELECT * FROM model_creation_suite_has_final_reviewed_by_records WHERE model_id='$activeModelUUID' AND task_id='$x'";		//Select all 
 			$rs2=$conn->query($sqlsel2);
 			//echo mysqli_num_rows($rs2);
 			if(mysqli_num_rows($rs2)>0){
@@ -61,7 +61,7 @@ for ($x=1; $x<=$num_rows; $x++)
 					$row_items ['final_review_date'] = null;				
 			}
 //3. Select the reviewer entrys for the checklist with task_id equal to x
-			$sqlsel3="SELECT * FROM model_creation_suite_has_reviewed_by_records WHERE model_id='$activeModelId' AND task_id='$x'";		//Select all 
+			$sqlsel3="SELECT * FROM model_creation_suite_has_reviewed_by_records WHERE model_id='$activeModelUUID' AND task_id='$x'";		//Select all 
 			$rs3=$conn->query($sqlsel3);
 			//echo mysqli_num_rows($rs3);
 			if(mysqli_num_rows($rs3)>0){
@@ -79,7 +79,7 @@ for ($x=1; $x<=$num_rows; $x++)
 			}
 
 //3. Select the preparer entrys for the checklist with task_id equal to x
-			$sqlsel4="SELECT * FROM model_creation_suite_has_prepared_by_records WHERE model_id='$activeModelId' AND task_id='$x'";		//Select all 
+			$sqlsel4="SELECT * FROM model_creation_suite_has_prepared_by_records WHERE model_UUID='$activeModelUUID' AND task_id='$x'";		//Select all 
 			$rs4=$conn->query($sqlsel4);
 			//echo mysqli_num_rows($rs4) . '<br>';
 			if(mysqli_num_rows($rs4)>0){

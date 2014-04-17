@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 $v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
 $v3 = "'" . $conn -> real_escape_string($activeCustomerId) . "'";
 
-$sqlins = "INSERT INTO ubm_model_has_customers (model_id, customers_id) VALUES ($v2, $v3)";
+$sqlins = "INSERT INTO ubm_model_has_customers (model_UUID, customers_id) VALUES ($v2, $v3)";
 
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);

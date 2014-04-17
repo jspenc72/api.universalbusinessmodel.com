@@ -1,37 +1,15 @@
 <?php
-$aname = $_GET['appname'];
-$RQType = $_GET['RQType'];
-$username = $_GET['username'];
-//Put your json request variables here
-
-$activeModelId = $_GET['activeModelId'];
-$activeProductId = $_GET['activeProductId'];
-
-//End JSON Request Variables
-
-$lat = $_GET['lat'];
-$lng = $_GET['lng'];
-//$property_name = $_GET['property_name'];
-//   if($aname=='FindMyDriver')
-//  {
-//$con=mysqli_connect("localhost","jessespe","Xfn73Xm0","jessespe_UBMv1"); 	//Define db Connection
-$DBServer = 'localhost';
-// e.g 'localhost' or '192.168.1.100'
-$DBUser = 'jessespe';
-$DBPass = 'Xfn73Xm0';
-$DBName = 'jessespe_UBMv1';
+require_once('globalGetVariables.php');
+require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn	
 $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
-
 // check connection
 if ($conn -> connect_error) {
 	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
 }
-
 //INSERT
-$v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
+$v2 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
 $v3 = "'" . $conn -> real_escape_string($activeCustomerId) . "'";
-
- $sql="DELETE FROM ubm_model_has_products WHERE product_id=$activeProductId AND model_id=$activeModelId";
+ $sql="DELETE FROM ubm_model_has_products WHERE product_id=$activeProductId AND model_UUID=$activeModelUUID";
 
  if($conn->query($sql) === false) {
  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);

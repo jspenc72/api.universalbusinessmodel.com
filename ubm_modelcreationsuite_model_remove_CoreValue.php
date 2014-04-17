@@ -4,7 +4,7 @@ $RQType = $_GET['RQType'];
 $username = $_GET['username'];
 //Put your json request variables here
 
-$activeModelId = $_GET['activeModelId'];
+$activeModelId = $_GET['activeModelUUID'];
 $activeCoreValueId = $_GET['activeCoreValueId'];
 
 //End JSON Request Variables
@@ -32,13 +32,13 @@ if ($conn -> connect_error) {
 $v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
 $v3 = "'" . $conn -> real_escape_string($activeCoreValueId) . "'";
 
- $sql="DELETE FROM ubm_model_has_corevalues WHERE corevalue_id=$activeCoreValueId AND model_id=$activeModelId";
+ $sql="DELETE FROM ubm_model_has_corevalues WHERE corevalue_id=$activeCoreValueId AND model_id=$activeModelUUID";
 
  if($conn->query($sql) === false) {
  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
  } else {
  	$affected_rows = $conn->affected_rows;
-	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelId.'}" . ')';
+	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelUUID.'}" . ')';
 
  }
 

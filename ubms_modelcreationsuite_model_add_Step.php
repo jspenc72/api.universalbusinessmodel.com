@@ -13,23 +13,23 @@ $v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
 $v3 = "'" . $conn -> real_escape_string($activePositionId) . "'";
 $v4 = "'" . $conn -> real_escape_string($activeJobDescriptionId) . "'";
 $v5 = "'" . $conn -> real_escape_string($activePolicyId) . "'";
-$v6 = "'" . $conn -> real_escape_string($activeProcedureId) . "'";
+$v6 = "'" . $conn -> real_escape_string($activeProcedureUUID) . "'";
 $v7 = "'" . $conn -> real_escape_string($activeStepId) . "'";
 $v8 = "'" . $conn -> real_escape_string($activeTaskId) . "'";
 $v9 = "'" . $conn -> real_escape_string($username) . "'";
 
 //SELECT
 //1. Find the current active model UUID
-$activeProcedureUUID = 1;
-	$sqlsel1="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID WHERE procedure_id=$v6";		//Select all 
-	$rs1=$conn->query($sqlsel1);
-	if($rs1 === false) {
-	  trigger_error('Wrong SQL: ' . $sqlsel1 . ' Error: ' . $conn->error, E_USER_ERROR);
-	} else{
-		while ($items1 = $rs1->fetch_assoc()) {
-			$activeProcedureUUID = stripslashes($items1['UUID']);
-		}
-	}
+// $activeProcedureUUID = 1;
+	// $sqlsel1="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID WHERE procedure_id=$v6";		//Select all 
+	// $rs1=$conn->query($sqlsel1);
+	// if($rs1 === false) {
+	  // trigger_error('Wrong SQL: ' . $sqlsel1 . ' Error: ' . $conn->error, E_USER_ERROR);
+	// } else{
+		// while ($items1 = $rs1->fetch_assoc()) {
+			// $activeProcedureUUID = stripslashes($items1['UUID']);
+		// }
+	// }
 // INSERT
 //2. Insert the activeStepId into UUID
 $sqlins = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID (legal_entity_id, model_id, position_id, jobDescription_id, policy_id, procedure_id, step_id, task_id, created_by) VALUES ('0','0','0','0','0','0',$v7,'0',$v9)";

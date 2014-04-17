@@ -29,7 +29,7 @@ if($rs === false) {
 		}			
   $rows_returned = $rs->num_rows;
 }
-$sqlins = "INSERT INTO model_creation_suite_has_prepared_by_records (model_id, preparer_username, task_id, start_time) VALUES ($returnedModelId, $v3, $v4, $v5)";
+$sqlins = "INSERT INTO model_creation_suite_has_prepared_by_records (model_UUID, preparer_username, task_id, start_time) VALUES ($returnedModelId, $v3, $v4, $v5)";
 
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);

@@ -11,7 +11,7 @@ if ($conn -> connect_error) {
 
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
-$v3 = "'" . $conn -> real_escape_string($activePositionId) . "'";
+$v3 = "'" . $conn -> real_escape_string($activePositionUUID) . "'";
 $v4 = "'" . $conn -> real_escape_string($activeJobDescriptionId) . "'";
 $v5 = "'" . $conn -> real_escape_string($activePolicyId) . "'";
 $v6 = "'" . $conn -> real_escape_string($activeProcedureId) . "'";
@@ -38,6 +38,7 @@ $sqlins = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUI
 if ($conn -> query($sqlins) === false) {
 	trigger_error('Wrong SQL: ' . $sqlins . ' Error: ' . $conn -> error, E_USER_ERROR);
 } else {
+	//$affected_rows = $conn->affected_rows;
 //3. Insert a row in the hierarchy object closureTable so our position is tied to the current activeModel in the hierarchy object table.
 //4. Insert a row in the hierarchy object closureTable so the position is tied to itself in the hierarchy object table.
 	$last_inserted_jobDescription_uuid = $conn -> insert_id;	
@@ -46,6 +47,7 @@ if ($conn -> query($sqlins) === false) {
 	if ($conn -> query($sqlins2) === false) {
 		trigger_error('Wrong SQL: ' . $sqlins2 . ' Error: ' . $conn -> error, E_USER_ERROR);
 	} else {
+		//	$affected_rows = $affected_rows + $conn->affected_rows;
 //5. Now INSERT the links to all the ancestors of the JD_UUID into the Closure table so has a tie to all ojects above it.
 			$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
 						 SELECT a.ancestor_id, d.descendant_id, a.path_length+d.path_length+1
@@ -56,12 +58,16 @@ if ($conn -> query($sqlins) === false) {
 				trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 				echo "there was a problem";
 			} else {
-				echo $_GET['callback'] . '(' . "{'message' : 'Requested Job Description $v4 was created successfully and added to positionId $v3 !'}" . ')';
+				$inserted_id = $conn->insert_id;
+				$affected_rows = $conn->affected_rows;
+				echo $_GET['callback'] . '(' . "{'message' : 'An instance of the requested Job Description, $v4 was created successfully, given the uuid: $last_inserted_jobDescription_uuid. the affected rows is: $affected_rows and added to positionUUID: $activePositionUUID ,
+				with the following id: $inserted_id for a relationship in the closure table !'}" . ')';
 			}		
 	}
 }
 
-/*SELECT
+/*
+ SELECT
  $sqlsel="SELECT * FROM ubm_mcs_app_resolutions WHERE openitemid=$openitemid";
 
  $rs=$conn->query($sqlsel);

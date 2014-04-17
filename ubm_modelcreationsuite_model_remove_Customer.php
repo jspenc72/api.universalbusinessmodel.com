@@ -21,24 +21,19 @@ $DBUser = 'jessespe';
 $DBPass = 'Xfn73Xm0';
 $DBName = 'jessespe_UBMv1';
 $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
-
 // check connection
 if ($conn -> connect_error) {
 	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
 }
-
 //INSERT
-$v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
+$v2 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
 $v3 = "'" . $conn -> real_escape_string($activeCustomerId) . "'";
-
- $sql="DELETE FROM ubm_model_has_customers WHERE customers_id=$activeCustomerId AND model_id=$activeModelId";
-
+ $sql="DELETE FROM ubm_model_has_customers WHERE customers_id=$activeCustomerId AND model_UUID=$activeModelUUID";
  if($conn->query($sql) === false) {
  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
  } else {
  	$affected_rows = $conn->affected_rows;
-	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelId.'}" . ')';
-
+	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Model modified was $activeModelUUID.'}" . ')';
  }
 
 
