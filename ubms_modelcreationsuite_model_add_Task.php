@@ -1,10 +1,14 @@
 <?php
 require_once('globalGetVariables.php');
-require_once('DBConnect_UBMv1.php');		//Provides the variables used for database connection $conn
+require_once('ubms_db_config.php');
+require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn
+
 $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
-if ($conn -> connect_error) {				// check connection				
+// check connection
+if ($conn -> connect_error) {
 	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
 }
+
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($activeModelId) . "'";
 $v3 = "'" . $conn -> real_escape_string($activePositionId) . "'";
@@ -46,7 +50,7 @@ if ($conn -> query($sqlins) === false) {
 			$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
 						 SELECT a.ancestor_id, d.descendant_id, a.path_length+d.path_length+1
 						   FROM ubm_modelcreationsuite_heirarchy_object_closureTable a, ubm_modelcreationsuite_heirarchy_object_closureTable d
-						  WHERE a.descendant_id=$activeStepUUID 
+						  WHERE a.descendant_id=$v7 
 						  	AND d.ancestor_id=$last_inserted_task_uuid";
 			if ($conn -> query($sqlins3) === false) {
 				trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);

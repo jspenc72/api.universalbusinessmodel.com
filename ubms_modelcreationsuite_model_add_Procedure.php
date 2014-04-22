@@ -1,8 +1,9 @@
 <?php
 require_once('globalGetVariables.php');
-require_once('DBConnect_UBMv1.php');		//Provides the variables used for database connection $conn
-$conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
+require_once('ubms_db_config.php');
+require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn
 
+$conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 // check connection
 if ($conn -> connect_error) {
 	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
@@ -49,13 +50,13 @@ if ($conn -> query($sqlins) === false) {
 			$sqlins3 =  "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable(ancestor_id, descendant_id, path_length)
 						 SELECT a.ancestor_id, d.descendant_id, a.path_length+d.path_length+1
 						   FROM ubm_modelcreationsuite_heirarchy_object_closureTable a, ubm_modelcreationsuite_heirarchy_object_closureTable d
-						  WHERE a.descendant_id=$activePolicyUUID 
+						  WHERE a.descendant_id=$v5 
 						  	AND d.ancestor_id=$last_inserted_procedure_uuid";
 			if ($conn -> query($sqlins3) === false) {
 				trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 				echo "there was a problem";
 			} else {
-				echo $_GET['callback'] . '(' . "{'message' : 'Requested Procedure $v6 was created successfully and added to policyId $v5 !'}" . ')';
+				echo $_GET['callback'] . '(' . "{'message' : 'Requested Procedure $v6 was created successfully and added to policyUUID $v5 !'}" . ')';
 			}		
 	}
 }

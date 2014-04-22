@@ -15,7 +15,7 @@ $all_items = array();
 						JOIN ubm_modelcreationsuite_heirarchy_object_closureTable c
 						ON (u.UUID=c.descendant_id)
 						WHERE c.ancestor_id=$v2
-						ORDER BY descendant_id";
+						ORDER BY u.UUID";
 			//$sqlsel1="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID WHERE UUID=1";		//Select all 
 			$rs1=$conn->query($sqlsel1);
 			if($rs1 === false) {
@@ -23,9 +23,13 @@ $all_items = array();
 			} else{
 				while ($items1 = $rs1->fetch_assoc()) {
 					$returnedDescendant = stripslashes($items1['descendant_id']);
-					$sqlsel2="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_closureTable
-								WHERE path_length='1'
-								AND descendant_id=$returnedDescendant";					
+					$returnedAncestor = stripslashes($items1['ancestor_id']);						
+//2. select the record with path_length=1 so that you get the immediate parent.						
+					$sqlsel2="SELECT * FROM ubm_modelcreationsuite_heirarchy_object_antiSolipsism_UUID u
+								JOIN ubm_modelcreationsuite_heirarchy_object_closureTable c
+								ON (u.UUID=c.descendant_id)
+								WHERE c.descendant_id=$returnedDescendant
+								AND c.path_length=1";
 					$rs2=$conn->query($sqlsel2);
 					if($rs1 === false) {
 					  trigger_error('Wrong SQL: ' . $sqlsel2 . ' Error: ' . $conn->error, E_USER_ERROR);
@@ -33,7 +37,7 @@ $all_items = array();
 						while ($items2 = $rs2->fetch_assoc()) {
 							$all_items[] = $items2;
 						}								
-					}
+					}						
 				}								
 			}
 //6. JSONP packaged $all_items array

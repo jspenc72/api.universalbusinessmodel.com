@@ -72,7 +72,7 @@ $all_items = array();
 					}				
 						//echo mysqli_num_rows($rs2);				
 				}else{
-				echo "this is a test 2";
+					echo "this is a test 2";
 				}
 						$num_rows = mysqli_num_rows($rs1);
 						//echo "the total number of rows: $num_rows </br>";									
