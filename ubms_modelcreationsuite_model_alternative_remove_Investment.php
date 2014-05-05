@@ -10,12 +10,14 @@ $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 	}
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($activeAlternativeId) . "'";
-$v3 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
+$v3 = "'" . $conn -> real_escape_string($activeInvestmentId) . "'";
 
- $sql="DELETE FROM ubm_model_has_alternatives WHERE alternative_id=$v2 AND model_UUID=$v3";
+ $sql="DELETE FROM ubm_model_alternatives_has_investments WHERE investment_id=$v3 AND alternative_id=$v2";
+
  if($conn->query($sql) === false) {
  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
  } else {
- 	$affected_rows = $conn->affected_rows;	
-		echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Alternative removed was $v2.'}" . ')';
+ 	$affected_rows = $conn->affected_rows;
+	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Alternative modified was $v2.'}" . ')';
+
  }

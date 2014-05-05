@@ -23,9 +23,9 @@ if ($conn -> query($sqlins) === false) {
 	if ($conn -> query($sqlins2) === false) {
 		trigger_error('Wrong SQL: ' . $sqlins2 . ' Error: ' . $conn -> error, E_USER_ERROR);
 	} else {
-
+		echo $_GET['callback'] . '(' . "{'message' : 'Customer $name created successfully!'}" . ')';
 	}
 }
 
-echo $_GET['callback'] . '(' . "{'message' : 'Customer $name created successfully!'}" . ')';
+
 

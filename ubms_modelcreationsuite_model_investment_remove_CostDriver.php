@@ -9,13 +9,15 @@ $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 	  trigger_error('Database connection failed: '  . $conn->connect_error, E_USER_ERROR);
 	}
 //INSERT
-$v2 = "'" . $conn -> real_escape_string($activeAlternativeId) . "'";
-$v3 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
+$v2 = "'" . $conn -> real_escape_string($activeInvestmentId) . "'";
+$v3 = "'" . $conn -> real_escape_string($activeCostDriverId) . "'";
 
- $sql="DELETE FROM ubm_model_has_alternatives WHERE alternative_id=$v2 AND model_UUID=$v3";
+ $sql="DELETE FROM ubm_model_investment_has_cost_drivers WHERE cost_driver_id=$v3 AND investment_id=$v2";
+
  if($conn->query($sql) === false) {
  	trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
  } else {
- 	$affected_rows = $conn->affected_rows;	
-		echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Alternative removed was $v2.'}" . ')';
+ 	$affected_rows = $conn->affected_rows;
+	echo $_GET['callback'] . '(' . "{'message' : 'The number of affected rows is $affected_rows. the Investment modified was $v2.'}" . ')';
+
  }

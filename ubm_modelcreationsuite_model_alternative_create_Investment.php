@@ -6,7 +6,7 @@ $username = $_GET['username'];
 
 $activeAlternativeId = $_GET['activeAlternativeId'];
 $description = $_GET['description'];
-$title = $_GET['title'];
+$investmentTitle = $_GET['investmentTitle'];
 $type = $_GET['type'];
 
 //End JSON Request Variables
@@ -27,7 +27,7 @@ if ($conn -> connect_error) {
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($activeAlternativeId) . "'";
 $v3 = "'" . $conn -> real_escape_string($description) . "'";
-$v4 = "'" . $conn -> real_escape_string($title) . "'";
+$v4 = "'" . $conn -> real_escape_string($investmentTitle) . "'";
 $v5 = "'" . $conn -> real_escape_string($type) . "'";
 $v6 = "'" . $conn -> real_escape_string($username) . "'";
 
@@ -37,11 +37,11 @@ if ($conn -> query($sqlins) === false) {
 } else {
 	$last_inserted_id = $conn -> insert_id;
 	//$affected_rows = $conn -> affected_rows;
-	$sqlins2 = "INSERT INTO ubm_model_alternatives_has_investments (alternative_id, created_by, investment_id) VALUES ( $v2, $v6, $last_inserted_id )";
+	$sqlins2 = "INSERT INTO ubm_model_alternative_has_investments (alternative_id, created_by, investment_id) VALUES ( $v2, $v6, $last_inserted_id )";
 	if ($conn -> query($sqlins2) === false) {
 		trigger_error('Wrong SQL: ' . $sqlins2 . ' Error: ' . $conn -> error, E_USER_ERROR);
 	} else {
-		echo $_GET['callback'] . '(' . "{'message' : 'Requested Investment $title was created successfully and added to Alternative id: $activeAlternativeId !'}" . ')';
+		echo $_GET['callback'] . '(' . "{'message' : 'Requested Investment $v4 was created successfully and added to Alternative id: $v2 !'}" . ')';
 	}
 }
 

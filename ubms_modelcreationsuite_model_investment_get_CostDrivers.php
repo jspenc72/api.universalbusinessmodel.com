@@ -1,6 +1,6 @@
 <?php
 require_once('globalGetVariables.php');
-//require_once('ubms_db_config.php');
+require_once('ubms_db_config.php');
 require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn
 
 $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
@@ -12,11 +12,11 @@ $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 $all_items = array();
 //1. Select all records in the ubm_model_alternatives table that have an instance created in the ubm_model_has_alternatives table for the activeModelId.
 			$sqlsel1="SELECT * 					
-			FROM ubm_model_alternative_has_investments  
-			JOIN ubm_model_investments 
-			ON ubm_model_alternative_has_investments.investment_id=ubm_model_investments.id
-			WHERE ubm_model_alternative_has_investments.alternative_id=$activeModelAlternativeId
-			ORDER BY ubm_model_investments.id";												//Get all alternatives for current model.
+			FROM ubm_model_investment_has_cost_drivers  
+			JOIN ubm_model_investment_cost_drivers
+			ON ubm_model_investment_has_cost_drivers.cost_driver_id=ubm_model_investment_cost_drivers.id
+			WHERE ubm_model_investment_has_cost_drivers.investment_id=$activeModelInvestmentId
+			ORDER BY ubm_model_investment_cost_drivers.id";												//Get all alternatives for current model.
 			//Select all 
 			$rs1=$conn->query($sqlsel1);
 			if($rs1 === false) {
@@ -30,7 +30,7 @@ $all_items = array();
 //6. JSONP packaged $all_items array
 							echo $_GET['callback'] . '(' . json_encode($all_items) . ')';				//Output $all_items array in json encoded format.			
 				}else{
-				       echo $_GET['callback'] . '(' . "[{'title' : 'No Investments Yet!','investment_id' : '0'}]" . ')';							
+				
 				}								
 			}
 

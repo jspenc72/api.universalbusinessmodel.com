@@ -13,9 +13,13 @@ $v4 = "'" . $conn -> real_escape_string($activeModelUUID) . "'";
 $all_items = array();
 //1. Select all records for checklist items stored in model_creation_suite, Count the number of items in the checklist.
 			$sqlsel1="SELECT * FROM model_creation_suite_has_prepared_by_records
-						JOIN model_creation_suite
+						LEFT JOIN model_creation_suite
 						ON model_creation_suite.line_number=model_creation_suite_has_prepared_by_records.task_id
-						WHERE model_UUID=$v4";		//Select all 
+						UNION
+						SELECT * FROM model_creation_suite_has_prepared_by_records
+						RIGHT JOIN model_creation_suite
+						ON model_creation_suite.line_number=model_creation_suite_has_prepared_by_records.task_id";		//Select all
+
 			$rs1=$conn->query($sqlsel1);
 			if($rs1 === false) {
 			  trigger_error('Wrong SQL: ' . $sqlsel1 . ' Error: ' . $conn->error, E_USER_ERROR);

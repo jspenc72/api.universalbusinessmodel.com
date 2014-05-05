@@ -1,7 +1,5 @@
- <?php
-//require_once ('ubms_db_config.php');
-$email = $_GET['email'];
-$hash = $_GET['activationCode'];
+<?php
+require_once('globalGetVariables.php');
  
 $DBServer = 'localhost'; // e.g 'localhost' or '192.168.1.100'
 $DBUser   = 'jessespe';
@@ -19,7 +17,7 @@ $DBName   = 'jessespe_FindMyDriver';
 //UPDATE
  		//$v1="'" . $conn->real_escape_string($disposition) . "'";		
  			 
-		$sql="UPDATE `members` SET email_activation_status='1' WHERE activation_code='$hash' AND email='$email' AND email_activation_status='0'";
+		$sql="UPDATE `members` SET email_activation_status='1' WHERE activation_code='$hash'";
 		if($conn->query($sql) === false) {
 		  trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
 		} else {

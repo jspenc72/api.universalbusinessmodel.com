@@ -18,12 +18,13 @@
 				if($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
 						$returnuserpassword = stripslashes($row['password']);
+						$returnPasswordStatus = stripslashes($row['password_status']);
 						$accounttype = stripslashes($row['account_type']);
 						if($returnuserpassword==md5($usrpasswd)){
-				         	echo $_GET['callback'] . '(' . "{'message' : 'Login successful for user $returnuser with db password $returnuserpassword and entered password $usrpasswd','validation' : 'TRUE','accounttype' : '$accounttype'}" . ')';
+				         	echo $_GET['callback'] . '(' . "{'message' : 'Login successful for user $username $returnPasswordStatus','validation' : 'TRUE','accounttype' : '$accounttype', 'passwordStatus' : '$returnPasswordStatus'}" . ')';
 //				         	echo $_GET['callback'] . '(' . "{'message' : 'Password Validated'}" . ')';
 						}else{
-				         	echo $_GET['callback'] . '(' . "{'message' : 'Login unsuccessful for user $returnuser with db password $returnuserpassword and entered password $usrpasswd','validation' : 'FALSE'}" . ')';							
+				         	echo $_GET['callback'] . '(' . "{'message' : 'Login unsuccessful','validation' : 'FALSE'}" . ')';							
 						}
 //						echo stripslashes($row['username']);
 //						echo "</br>";	

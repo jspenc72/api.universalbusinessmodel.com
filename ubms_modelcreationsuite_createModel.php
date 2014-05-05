@@ -10,7 +10,7 @@ if ($conn -> connect_error) {
 }
 //INSERT
 $v2 = "'" . $conn -> real_escape_string($reference) . "'";
-$v3 = "'" . $conn -> real_escape_string($title) . "'";
+$v3 = "'" . $conn -> real_escape_string($modelTitle) . "'";
 $v4 = "'" . $conn -> real_escape_string($descritpion) . "'";
 $v5 = "'" . $conn -> real_escape_string($username) . "'";
 
@@ -41,7 +41,7 @@ if ($conn -> query($sqlins) === false) {
 			$last_inserted_id = $conn -> insert_id;
 	//4. Insert a row in the hierarchy object closureTable so the model is tied to itself in the hierarchy object table.
 			$sqlins3 = "INSERT INTO ubm_modelcreationsuite_heirarchy_object_closureTable ( ancestor_id, descendant_id, path_length, created_by ) 
-						VALUES ( $last_inserted_model_uuid, $last_inserted_model_uuid, '2', $v5 )";
+						VALUES ( $last_inserted_model_uuid, $last_inserted_model_uuid, '0', $v5 )";
 			if ($conn -> query($sqlins3) === false) {
 				trigger_error('Wrong SQL: ' . $sqlins3 . ' Error: ' . $conn -> error, E_USER_ERROR);
 			} else {

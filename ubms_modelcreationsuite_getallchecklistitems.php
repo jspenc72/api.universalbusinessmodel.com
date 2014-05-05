@@ -1,6 +1,6 @@
  <?php
 require_once('globalGetVariables.php');
-require_once('ubms_db_config.php');
+//require_once('ubms_db_config.php');
 require_once('DBConnect_UBMv1.php');		//Provides the variables used for UBMv1 database connection $conn
 	$conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 	// check connection
@@ -88,13 +88,16 @@ for ($x=1; $x<=$num_rows; $x++)
 				while ($items = $rs4->fetch_assoc()) {
 							$returnPreparer = stripslashes($items['preparer_username']);
 							$returnPreparedDate = stripslashes($items['prepared_date']);
+							$returnStatus = stripslashes($items['status']);
 					$row_items ['preparer_username'] = $returnPreparer;
 					$row_items ['prepared_date'] = $returnPreparedDate;
+					$row_items ['status'] = $returnStatus;
 					//$all_items [] = $items;
 				}				
 			}else{
 					$row_items ['preparer_username'] = null;
-					$row_items ['prepared_date'] = null;				
+					$row_items ['prepared_date'] = null;	
+					$row_items ['status'] = null;			
 			}
 //5. Select the appropriate row from the model_creation_suite table.
 			$sqlsel5="SELECT * FROM model_creation_suite WHERE line_number='$x'";		//Select all 

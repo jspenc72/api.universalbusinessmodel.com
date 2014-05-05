@@ -41,7 +41,7 @@ $all_items = array();
 					while ($items = $rs1->fetch_assoc()) {
 						$path_length = stripslashes($items['path_length']);
 						$descendant_UUID = stripslashes($items['descendant_UUID']);
-						if($path_length<2){
+						if($path_length<2 && $path_length>0){
 							$all_items [] = $items;
 						}else{
 							$sqlsel2="SELECT * FROM ubm_model_position_closure c
@@ -63,7 +63,7 @@ $all_items = array();
 									}				
 										//echo mysqli_num_rows($rs2);				
 								}else{
-									echo "this is a test 1";
+//									echo "this is a test 1";
 								}
 										$num_rows2 = mysqli_num_rows($rs2);
 										//echo "the total number of rows: $num_rows </br>";									
@@ -72,7 +72,7 @@ $all_items = array();
 					}				
 						//echo mysqli_num_rows($rs2);				
 				}else{
-					echo "this is a test 2";
+	//				echo "this is a test 2";
 				}
 						$num_rows = mysqli_num_rows($rs1);
 						//echo "the total number of rows: $num_rows </br>";									

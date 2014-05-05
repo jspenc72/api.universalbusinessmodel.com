@@ -138,7 +138,7 @@ $instruction = $_GET['instruction'];
 $procedureId = $_GET['procedureId'];
 	//UBM MCS Model Create Task
 $activeModelId = $_GET['activeModelId'];
-$title = $_GET['title'];
+$modelTitle = $_GET['modelTitle'];
 $taskNumber = $_GET['taskNumber'];
 $reference = $_GET['reference'];
 $instruction = $_GET['instruction'];
@@ -340,3 +340,90 @@ $activePositionUUID = $_GET['activePositionUUID'];
 
 //object detail
 $activeUUID = $_GET['activeUUID'];
+
+
+
+//create alternative pro
+$activeModelId = $_GET['activeModelId'];
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+$alternativeProDescription = $_GET['alternativeProDescription'];
+$alternativeProROIRef = $_GET['alternativeProROIRef'];
+$alternativeProHighBenefit = $_GET['alternativeProHighBenefit'];
+$alternativeProLowBenefit = $_GET['alternativeProLowBenefit'];
+
+//create alternative con
+$activeModelId = $_GET['activeModelId'];
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+$alternativeConDescription = $_GET['alternativeConDescription'];
+$alternativeConROIRef = $_GET['alternativeConROIRef'];
+$alternativeConHighCost = $_GET['alternativeConHighCost'];
+$alternativeConLowCost = $_GET['alternativeConLowCost'];
+
+
+//all alternative stuff that has not been added
+$activeAlternative = $_GET['activeModelAlternativeId'];
+$activeAlternativeRisk = $_GET['activeModelAlternativeRiskId'];
+$activeAlternativeId = $_GET['activeAlternativeId'];
+$description = $_GET['description'];
+$title = $_GET['title'];
+$type = $_GET['type'];
+$riskDescription = $_GET['riskDescription'];
+$riskCategory = $_GET['riskCategory'];
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+$activeModelId = $_GET['activeModelId'];
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+$activeAlternativeId = $_GET['activeAlternativeId'];
+$activeInvestmentId = $_GET['activeInvestmentId'];
+$activeModelId = $_GET['activeModelId'];
+$activeAlternativeId = $_GET['activeAlternativeId'];
+$activeRiskId = $_GET['activeRiskId'];
+
+
+
+//all investment stuff that has not been added
+$activeInvestmentId = $_GET['activeInvestmentId'];
+$costPerUnit = $_GET['costPerUnit'];
+$description = $_GET['description'];
+$numberOfUnits = $_GET['numberOfUnits'];
+$totalCost = $_GET['totalCost'];
+$activeModelInvestmentId = $_GET['activeModelInvestmentId'];
+$activeModelInvestmentId = $_GET['activeModelInvestmentId'];
+$activeInvestmentId = $_GET['activeInvestmentId'];
+$activeCostDriverId = $_GET['activeCostDriverId'];
+$activeInvestmentId = $_GET['activeInvestmentId'];
+$activeIncomeDriverId = $_GET['activeIncomeDriverId'];
+$activeInvestmentId = $_GET['activeInvestmentId'];
+$incomePerUnit = $_GET['incomePerUnit'];
+$description = $_GET['description'];
+$numberOfUnits = $_GET['numberOfUnits'];
+$totalIncome = $_GET['totalIncome'];
+$activeModelAlternativeId = $_GET['activeModelAlternativeId'];
+
+//alternative add risk
+$activeAlternative = $_GET['activeModelAlternativeId'];
+$activeAlternativeRisk = $_GET['activeModelAlternativeRiskId'];
+$investmentTitle = $_GET['investmentTitle'];
+
+
+//Add Owner Name
+
+$activeOwnerUUID = $_GET['activeOwnerUUID'];
+$percentOwned = $_GET['percentOwned'];
+$ownerName = $_GET['ownerName'];
+$ownerNameId = $_GET['ownerNameId'];
+$email = $_GET['email'];
+$positionName = $_GET['positionName'];
+$activePositionUUID = $_GET['activePositionUUID'];
+$positionNameId = $_GET['positionNameId'];
+
+$email = $_GET['email'];
+$name = $_GET['name'];
+$positionNameId = $_GET['positionNameId'];
+
+$email = $_GET['email'];
+$hash = $_GET['activationCode'];
+$password = $_GET['password'];
+
+//Product Creation Suite
+$productSource = $_GET['productSource'];
+
