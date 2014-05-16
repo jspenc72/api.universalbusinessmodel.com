@@ -11,23 +11,26 @@
   .hide { display: none;}
   .show { display: block;}
   </style>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>  
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>	
   <script type="text/javascript">
 	//4. Call this callback function when the GAPI auth request has finished.
 	  var loginFinished = function(authResult) {
 		  if (authResult) {
-		  	//4.1 Load the users profile picture and email address
-		  	
+		  	//4.1 Load the users profile picture and email address		  	
 		        gapi.client.load('plus','v1', loadProfile);  // Trigger request to get the email address.
-		    
 		   //console.log(authResult);
 		    var el = document.getElementById('oauth2-results');
 		    var label = '';
 		    toggleDiv('oauth2-results');
 		    if (authResult['status']['signed_in']) {
-		      label = 'User granted access:';
+		      label = 'User granted application access:';
 		      gapi.auth.setToken(authResult);
 		    } else {
-		      label = 'Access denied: ' + authResult['error'];
+		      label = 'User denied access: ' + authResult['error'];
 		    }
 		    el.innerHTML = label /* + '<pre class="prettyprint"><code>' +
 		        // JSON.stringify doesn't work in IE8.
@@ -76,7 +79,31 @@
 	    document.getElementById('pic').innerHTML = '<img src="' + profile['image']['url'] + '" />';
 	    document.getElementById('email').innerHTML = email;
 	    toggleElement('profile');
+
+		$.getJSON('http://api.universalbusinessmodel.com/ubms_createAccount_GAPI.php?callback=?', {//JSONP Request
+			key : "YDoS20lf7Vrnr22h8Ma6NGUV5DblnVhueTPXS7gPynRvQ6U8optzfnMDs3UD",
+			displayNameGAPI : profile['displayName'],
+			emailGAPI: email
+		}, function(res, status) {
+				alert(res.message);
+		});	
+		//Get a persons visible circle
+		gapi.client.load('plus','v1', function(){
+		 var request = gapi.client.plus.people.list({
+		   'userId': 'me',
+		   'collection': 'visible'
+		 });
+		 request.execute(function(resp) {
+		   document.getElementById('numFriends').innerHTML = "Friends: " + resp.totalItems;
+			$.each(resp.items, function(i, item) {
+				$("#friendListview").append("<li><a href='" + item.url + "'><img src='" + item.image.url + "' alt='France' class='ui-li-icon ui-corner-none'>" + item.displayName + "</a></li>");
+				$('#friendListview').listview("refresh");
+				// alert(item.displayName);
+			});
+		 });
+		});
 	  }
+
 	  /**
 	   * Utility function to show or hide elements by their IDs.
 	   */
@@ -132,9 +159,13 @@
     <div>
       <span id="pic"></span>
       <span id="name"></span>
+      <span id="numFriends"></span>
     </div>
 
     <div id="email"></div>
+	<ul id="friendListview" data-role="listview" data-autodividers="true" data-filter="true" data-inset="true">
+
+	</ul>
   </div>
 </body>
 </html>

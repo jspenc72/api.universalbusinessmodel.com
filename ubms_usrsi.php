@@ -19,9 +19,11 @@
 					while($row = $result->fetch_assoc()) {
 						$returnuserpassword = stripslashes($row['password']);
 						$returnPasswordStatus = stripslashes($row['password_status']);
+						$returnActivationStatus = stripslashes($row['email_activation_status']);
 						$accounttype = stripslashes($row['account_type']);
+						$walkthrough = stripslashes($row['first_time_login']);
 						if($returnuserpassword==md5($usrpasswd)){
-				         	echo $_GET['callback'] . '(' . "{'message' : 'Login successful for user $username $returnPasswordStatus','validation' : 'TRUE','accounttype' : '$accounttype', 'passwordStatus' : '$returnPasswordStatus'}" . ')';
+				         	echo $_GET['callback'] . '(' . "{'message' : 'Login successful for user $username $returnPasswordStatus','validation' : 'TRUE','accounttype' : '$accounttype', 'passwordStatus' : '$returnPasswordStatus', 'activationStatus' : '$returnActivationStatus', 'walkthrough' : '$walkthrough'}" . ')';
 //				         	echo $_GET['callback'] . '(' . "{'message' : 'Password Validated'}" . ')';
 						}else{
 				         	echo $_GET['callback'] . '(' . "{'message' : 'Login unsuccessful','validation' : 'FALSE'}" . ')';							

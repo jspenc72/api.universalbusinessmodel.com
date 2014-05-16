@@ -45,4 +45,5 @@ $headers = "From:" . $from;
 //Send SMS Message
 
 mail("8016086458@vtext.com", "", "$username gave your app has a new open item!", "From: App <openitem@universalbusinessmodel.com>\r\n");
+mail("4352302281@vtext.com", "", "$username added an open point!", "From: App <openitem@universalbusinessmodel.com>\r\n");
 //echo "SMS was sent!";

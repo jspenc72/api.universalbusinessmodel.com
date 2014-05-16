@@ -20,9 +20,13 @@ $DBName   = 'jessespe_FindMyDriver';
 		$sql="UPDATE `members` SET email_activation_status='1' WHERE activation_code='$hash'";
 		if($conn->query($sql) === false) {
 		  trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
-		} else {
-		  $affected_rows = $conn->affected_rows;
+		} else if($affected_rows = $conn->affected_rows >0){
+		  
 		  echo "Your account has been successfully activated!";
-		}
-		?>
+		  ?>
 		<p>Please click <a href="http://www.universalbusinessmodel.com/dev">here</a> to log in!</p>
+		<?php
+		} else {
+			echo "Verification Failed.";
+		}
+		

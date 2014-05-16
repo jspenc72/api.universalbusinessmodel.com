@@ -1,5 +1,7 @@
 <?php
-require_once ('ubms_db_config.php');
+require_once('globalGetVariables.php');
+require_once('ubms_db_config.php');
+require_once('DBConnect_UBMv1.php');		
 $aname = $_GET['appname'];
 $RQType = $_GET['RQType'];
 $usremail = $_GET['email'];
@@ -9,13 +11,11 @@ $licenseAgreement = $_GET['licenseAgreement'];
 $termsOfService = $_GET['termsOfService']; 
 $hash = md5( rand(0,1000) );
 $securePassword = md5($usrpasswd);
-
-$conn = mysqli_connect("localhost", "jessespe", "Xfn73Xm0", "jessespe_FindMyDriver");
-//Define db Connection
-if (mysqli_connect_errno($conn))// Check connection
-{
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+	$conn = new mysqli("localhost","jessespe","Xfn73Xm0","jessespe_FindMyDriver");
+	// check connection
+	if ($conn->connect_error) {
+	  trigger_error('Database connection failed: '  . $conn->connect_error, E_USER_ERROR);
+	}
 
 $v2 = "'" . $conn -> real_escape_string($aname) . "'";
 $v3 = "'" . $conn -> real_escape_string($RQType) . "'";
@@ -26,12 +26,31 @@ $v7 = "'" . $conn -> real_escape_string($licenseAgreement) . "'";
 $v8 = "'" . $conn -> real_escape_string($termsOfService) . "'";
 $v9 = "'" . $conn -> real_escape_string($hash) . "'";
 
-
-mysqli_query($conn, "INSERT INTO members (username, email, password, agree_to_license_agreement, agree_to_terms_of_service, activation_code, email_activation_status)
-				VALUES ('$usrname', '$usremail', '$securePassword', '$licenseAgreement', '$termsOfService', '$hash', '0')");
+$sqlins = "INSERT INTO members (username, email, password, agree_to_license_agreement, agree_to_terms_of_service, activation_code, email_activation_status)
+				VALUES ('$usrname', '$usremail', '$securePassword', '$licenseAgreement', '$termsOfService', '$hash', '0')";
+if (!$conn -> query($sqlins)) {
+	$theError = $conn -> error;
+	echo $_GET['callback'] . '(' . "{'message' : 'Unable to Process your request: $theError'}" . ')';
+} else {
+	$last_inserted_id = $conn -> insert_id;
+	//$affected_rows = $conn -> affected_rows;
 				echo $_GET['callback'] . '(' . "{'message' : 'Registration successful!'}" . ')';
-mysqli_close($conn);
-
+}
+$conn2 = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
+// check connection
+if ($conn -> connect_error) {
+	trigger_error('Database connection failed: ' . $conn -> connect_error, E_USER_ERROR);
+}
+$sqlins2 = "INSERT INTO agreements (member_id, terms_of_service, license_agreement_setup)
+				VALUES ('$last_inserted_id', '1', '1')";
+if (!$conn2 -> query($sqlins)) {
+	$theError = $conn -> error;
+	echo $_GET['callback'] . '(' . "{'message' : 'Unable to Process your request: $theError'}" . ')';
+} else {
+	$last_inserted_id = $conn2 -> insert_id;
+	//$affected_rows = $conn -> affected_rows;
+				echo $_GET['callback'] . '(' . "{'message' : 'Agreed!'}" . ')';
+}
 
 $to      = $usremail; // Send email to our user
 $subject = 'Please Verify Your Account'; // Give the email a subject 

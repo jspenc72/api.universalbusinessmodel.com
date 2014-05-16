@@ -1,7 +1,7 @@
 <?php
 require_once('globalGetVariables.php');
 //require_once('ubms_db_config.php');
-$securePassword = md5($password);
+$securePassword = md5($newPassword);
 
 $conn = mysqli_connect("localhost", "jessespe", "Xfn73Xm0", "jessespe_FindMyDriver");
 // check connection
